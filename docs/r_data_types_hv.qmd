@@ -1,0 +1,12 @@
+---
+title: "r_data_types"
+author: "Hailey Veirs"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+```
+
+

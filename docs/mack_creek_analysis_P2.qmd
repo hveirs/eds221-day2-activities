@@ -1,0 +1,57 @@
+---
+title: "Aqua Analysis - Mack Creek"
+author: "Hailey Veirs"
+format: html
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(janitor)
+```
+
+```{r}
+mack_verts <- read_csv(here::here("data", "AS00601.csv"))
+
+mack_verts_c <- clean_names(mack_verts)
+```
+
+```{r}
+# Check specs
+mc_wt_5 <- mack_verts_c$weight[5]
+mc_l1_8_20 <- mack_verts_c$length1[8:20]
+mc_dates <- mack_verts_c$sampledate[]
+```
+
+```{r}
+# Save species DITE obsverations
+mc_salamanders <- mack_verts_c %>% dplyr::filter(species == "DITE")
+
+# Plot a scatterplot!
+sal_plot <- ggplot(data = mc_salamanders, aes(x = length1, y = weight)) + 
+  geom_point(color = "blue") + 
+  labs(title = "Mack Salamanders Length vs Weight", 
+       x = "Length (mm)", 
+       y = "Weight (g)", 
+       caption = "Source: EDI Data Portal https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-and.4027.14")
+
+```
+
+```{r}
+mc_trout <- mack_verts_c %>% dplyr::filter(species == "ONCL")
+
+trout_plot <- ggplot(data = mc_trout, aes(x = length1, y = weight)) + 
+  geom_point(aes(color = "reach")) + 
+  labs(title = "Mack Trout Length vs Weight", 
+       x = "Length (mm)", 
+       y = "Weight (g)", 
+       caption = "Source: EDI Data Portal https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-and.4027.14") + 
+  facet_wrap(~reach)
+
+```
+

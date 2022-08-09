@@ -3,10 +3,61 @@ title: "r_data_types"
 author: "Hailey Veirs"
 format: html
 editor: visual
+execute: 
+  echo: true
+  warning: false
 ---
 
 ```{r}
 library(tidyverse)
+```
+
+## Section 1
+Create a vector and look at it
+
+```{r}
+vec_1 <- c(2, 5, 9, 10, 8, 12, 1, 0)
+
+# Check its specs
+class(vec_1)
+typeof(vec_1)
+vec_1_e3 <- vec_1[3]
+vec_1_e1 <- vec_1[1]
+vec_1_e5to7 <- vec_1[5:7]
+
+# Reassign the vector to a character vector
+as.character(vec_1)
+```
+
+```{r}
+vec_2 <- c(town = "Santa Barbara",
+           location = "Rincon", 
+           swell = "south")
+# Check the specs
+class(vec_2)
+
+# Use Tab to auto complete functions and stuff
+length(vec_2)
+vec_2_e2 <- vec_2[2]
+
+```
+
+```{r}
+
+df_1 <- tribble(
+  ~region, ~species, ~count,
+  "A", "otter", 12,
+  "B", "great white", 2,
+  "A", "sea lion", 36,
+  "D", "gray whale", 6
+)
+df_1
+
+class(df_1)
+class(df_1$species)
+
+max_count <- max(df_1$count)
+
 ```
 
 
